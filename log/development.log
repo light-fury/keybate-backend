@@ -1,0 +1,1686 @@
+  [1m[35m (99.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (26.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5442121261805267340);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateRooms (20151220191837)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (44.7ms)[0m  [1m[35mCREATE TABLE "rooms" ("id" serial primary key, "number" character varying, "key" character varying, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35mSQL (63.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20151220191837"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAttendees (20151220191845)
+  [1m[35m (40.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateAttendees < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (8.9ms)[0m  [1m[35mCREATE TABLE "attendees" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "email" character varying, "company_name" character varying, "job_name" character varying, "country" character varying, "picture" character varying, "joined_at" timestamp, "left_at" timestamp, "room_id" integer, "requested_call_at" timestamp, "hung_up_at" timestamp, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20151220191845"]]
+  [1m[35m (9.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateQuestions (20151220191853)
+  [1m[35m (40.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "questions" ("id" serial primary key, "room_id" integer, "attendee_id" integer, "body" text, "answered_at" timestamp, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20151220191853"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCallableToAttendees (20160208161141)
+  [1m[35m (40.9ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddCallableToAttendees < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (83.9ms)[0m  [1m[35mALTER TABLE "attendees" ADD "callable" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160208161141"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20160303143032)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateUsers < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (214.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "email" character varying, "location" character varying, "position" character varying, "picture_url" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160303143032"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateModerators (20160303143445)
+  [1m[35m (29.8ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateModerators < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "moderators" ("id" serial primary key, "room_id" integer, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160303143445"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveUserFromAttendee (20160303143533)
+  [1m[35m (25.8ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class RemoveUserFromAttendee < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "attendees" DROP "first_name"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "attendees" DROP "last_name"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "attendees" DROP "email"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "attendees" DROP "company_name"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "attendees" DROP "job_name"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "attendees" DROP "country"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "attendees" DROP "picture"[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160303143533"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdToAttendee (20160303144000)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddUserIdToAttendee < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "attendees" ADD "user_id" integer[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160303144000"]]
+  [1m[35m (23.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdAndIndexToUser (20160304183412)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddUserIdAndIndexToUser < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "api_user_id" character varying[0m
+  [1m[35m (39.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_api_user_id" ON "users"  ("api_user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160304183412"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTitleToRooms (20160414095117)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddTitleToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" ADD "room_name" character varying[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160414095117"]]
+  [1m[35m (39.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddModeratorRemoveKeyToRooms (20160421145828)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddModeratorRemoveKeyToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" ADD "moderator_id" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" DROP "key"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160421145828"]]
+  [1m[35m (39.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddScoreToQuestions (20160518153310)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddScoreToQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (42.7ms)[0m  [1m[35mALTER TABLE "questions" ADD "score" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160518153310"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFavorites (20160518155153)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateFavorites < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (41.7ms)[0m  [1m[35mCREATE TABLE "favorites" ("id" serial primary key, "follower_id" integer, "following_id" integer, "met_in_room" boolean DEFAULT 'f', "room_id" integer, "room_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160518155153"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFavoriteQuestions (20160522163607)
+  [1m[35m (40.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateFavoriteQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "favorite_questions" ("id" serial primary key, "user_id" integer, "question_id" integer, "room_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160522163607"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddHiddenToQuestions (20160525101451)
+  [1m[35m (209.7ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddHiddenToQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "questions" ADD "hidden" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160525101451"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeFollowerToUser (20160608111907)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class ChangeFollowerToUser < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "favorites" RENAME COLUMN "follower_id" TO "user_id"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160608111907"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddProfileLinkToUsers (20160615123738)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddProfileLinkToUsers < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "facebook_profile_link" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "linkedin_profile_link" character varying[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160615123738"]]
+  [1m[35m (40.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPinAndDisplayToQuestions (20160827152531)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddPinAndDisplayToQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (42.1ms)[0m  [1m[35mALTER TABLE "questions" ADD "pinnedByModerator" bool DEFAULT 'f'[0m
+  [1m[35m (2.2ms)[0m  [1m[35mALTER TABLE "questions" ADD "displayed" bool DEFAULT 'f'[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160827152531"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenamePinToQuestions (20160827153449)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class RenamePinToQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "questions" RENAME COLUMN "pinnedByModerator" TO "pinned_by_moderator"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160827153449"]]
+  [1m[35m (30.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayPanelDisplayNewToRooms (20160907133050)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddDisplayPanelDisplayNewToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (50.5ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_display_new" bool DEFAULT 't'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160907133050"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateQcmPolls (20160916103039)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateQcmPolls < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (24.3ms)[0m  [1m[35mCREATE TABLE "qcm_polls" ("id" serial primary key, "question" character varying, "option_a" character varying, "option_a_score" integer DEFAULT 0, "option_b" character varying, "option_b_score" integer DEFAULT 0, "option_c" character varying, "option_c_score" integer DEFAULT 0, "option_d" character varying, "option_d_score" integer DEFAULT 0, "moderator_id" integer, "room_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160916103039"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAnsweredPolls (20161004125140)
+  [1m[35m (24.9ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateAnsweredPolls < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "answered_polls" ("id" serial primary key, "option_letter" character varying, "answer_text" character varying, "room_name" character varying, "qcm_poll_id" integer, "user_id" integer, "room_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004125140"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddSentOutToQcmPolls (20161012111623)
+  [1m[35m (25.9ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddSentOutToQcmPolls < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (14.5ms)[0m  [1m[35mALTER TABLE "qcm_polls" ADD "sent_out" bool DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161012111623"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTotalAnswersToQcmPolls (20161012133924)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddTotalAnswersToQcmPolls < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (28.3ms)[0m  [1m[35mALTER TABLE "qcm_polls" ADD "total_answers" integer DEFAULT 0[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161012133924"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayOptionsToRooms (20161129052137)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddDisplayOptionsToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (25.5ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_display_poll" bool DEFAULT 'f'[0m
+  [1m[35m (2.2ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_display_poll_results" bool DEFAULT 't'[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161129052137"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayPollIdToRooms (20161129071406)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddDisplayPollIdToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_current_poll" integer[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161129071406"]]
+  [1m[35m (22.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddChartsToRooms (20170110213816)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddChartsToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (25.6ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_display_poll_bar_chart" bool DEFAULT 'f'[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_display_poll_pie_chart" bool DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170110213816"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDeviseToUsers (20170210103611)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.2ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (2.8ms)[0m  [1m[35mALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_ip" inet[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_ip" inet[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170210103611"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to EnableUuidExtension (20170223192025)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (229.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "uuid-ossp"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170223192025"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEvents (20170223192343)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.8ms)[0m  [1m[35mCREATE TABLE "events" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170223192343"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeUsersPrimaryKey (20170223201548)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (28.2ms)[0m  [1m[35mALTER TABLE "users" ADD "uuid" uuid DEFAULT uuid_generate_v4() NOT NULL[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" DROP "id"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" RENAME COLUMN "uuid" TO "id"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE users ADD PRIMARY KEY (id);[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170223201548"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventUsers (20170223212114)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.7ms)[0m  [1m[35mCREATE TABLE "event_users" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "user_id" uuid, "event_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_2fc76a96e7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_55572bff4d"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_event_users_on_user_id" ON "event_users"  ("user_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_event_users_on_event_id" ON "event_users"  ("event_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170223212114"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeTableNameFromRooms (20170224174218)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" RENAME TO "old_rooms"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "public"."rooms_id_seq" RENAME TO "old_rooms_id_seq"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "rooms_pkey" RENAME TO "old_rooms_pkey"[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224174218"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateNewRooms (20170224174349)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.8ms)[0m  [1m[35mCREATE TABLE "rooms" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "name" character varying, "event_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_aad715f1d9"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_rooms_on_event_id" ON "rooms"  ("event_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224174349"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeTableNameFromQuestions (20170224191203)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "questions" RENAME TO "old_questions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "public"."questions_id_seq" RENAME TO "old_questions_id_seq"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "questions_pkey" RENAME TO "old_questions_pkey"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224191203"]]
+  [1m[35m (21.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateNewQuestions (20170224191303)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.0ms)[0m  [1m[35mCREATE TABLE "questions" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "message" text, "room_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c982daf8c9"
+FOREIGN KEY ("room_id")
+  REFERENCES "rooms" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_room_id" ON "questions"  ("room_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224191303"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePolls (20170224203346)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.5ms)[0m  [1m[35mCREATE TABLE "polls" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "title" character varying, "room_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_874e1aec20"
+FOREIGN KEY ("room_id")
+  REFERENCES "rooms" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_polls_on_room_id" ON "polls"  ("room_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224203346"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventUserRooms (20170224214132)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (24.9ms)[0m  [1m[35mCREATE TABLE "event_user_rooms" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "event_user_id" uuid, "room_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_d93290ef93"
+FOREIGN KEY ("event_user_id")
+  REFERENCES "event_users" ("id")
+, CONSTRAINT "fk_rails_bc24eea059"
+FOREIGN KEY ("room_id")
+  REFERENCES "rooms" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_event_user_rooms_on_event_user_id" ON "event_user_rooms"  ("event_user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_event_user_rooms_on_room_id" ON "event_user_rooms"  ("room_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224214132"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePollOptions (20170225171601)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.8ms)[0m  [1m[35mCREATE TABLE "poll_options" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "description" text, "poll_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_aa85becb42"
+FOREIGN KEY ("poll_id")
+  REFERENCES "polls" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_poll_options_on_poll_id" ON "poll_options"  ("poll_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170225171601"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateContacts (20170227193932)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.5ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "event_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_4f68bfc985"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_event_id" ON "contacts"  ("event_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170227193932"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddForeignKeysToContacts (20170227195624)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "contacts" ADD "to_user_id" uuid[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "contacts" ADD "from_user_id" uuid[0m
+  [1m[35m (25.9ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_1274d05605"
+FOREIGN KEY ("to_user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_55611428c0"
+FOREIGN KEY ("from_user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170227195624"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateNotifications (20170228135205)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.2ms)[0m  [1m[35mCREATE TABLE "notifications" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "title" character varying, "description" text, "user_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b080fb4855"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_user_id" ON "notifications"  ("user_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170228135205"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMessages (20170228145927)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.7ms)[0m  [1m[35mCREATE TABLE "messages" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "body" text, "contact_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_7e8ca78ca8"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_contact_id" ON "messages"  ("contact_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170228145927"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCodeToEvent (20170228203917)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "code" character varying[0m
+  [1m[35m (22.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_events_on_code" ON "events"  ("code")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170228203917"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddLastMessageSentAtToContact (20170301011153)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "contacts" ADD "last_message_sent_at" timestamp[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301011153"]]
+  [1m[35m (23.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePollAnswers (20170301165255)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.3ms)[0m  [1m[35mCREATE TABLE "poll_answers" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "poll_id" uuid, "user_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_bc68367a40"
+FOREIGN KEY ("poll_id")
+  REFERENCES "polls" ("id")
+, CONSTRAINT "fk_rails_da1c9c019b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_poll_answers_on_poll_id" ON "poll_answers"  ("poll_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_poll_answers_on_user_id" ON "poll_answers"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301165255"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddForeignKeyToPollAnswear (20170301165453)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "poll_answers" ADD "option_id" uuid[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "poll_answers" ADD CONSTRAINT "fk_rails_6b7005ccd6"
+FOREIGN KEY ("option_id")
+  REFERENCES "poll_options" ("id")
+[0m
+  [1m[35m (21.7ms)[0m  [1m[35mCREATE  INDEX  "index_poll_answers_on_option_id" ON "poll_answers"  ("option_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301165453"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIndexesToContacts (20170301171347)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (23.2ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_from_user_id" ON "contacts"  ("from_user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_to_user_id" ON "contacts"  ("to_user_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301171347"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserToQuestion (20170301194346)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "questions" ADD "user_id" uuid[0m
+  [1m[35m (23.9ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_user_id" ON "questions"  ("user_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "questions" ADD CONSTRAINT "fk_rails_047ab75908"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301194346"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateQuestionUpvotes (20170301200023)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (53.8ms)[0m  [1m[35mCREATE TABLE "question_upvotes" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "user_id" uuid, "question_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_635f5ea25a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_7bdc6a4ebe"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_question_upvotes_on_user_id" ON "question_upvotes"  ("user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_question_upvotes_on_question_id" ON "question_upvotes"  ("question_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301200023"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddBlockedToContact (20170301201838)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (38.0ms)[0m  [1m[35mALTER TABLE "contacts" ADD "blocked" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301201838"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPublishedToPolls (20170303195332)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (42.8ms)[0m  [1m[35mALTER TABLE "polls" ADD "published" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170303195332"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddOpenToPolls (20170303201354)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.2ms)[0m  [1m[35mALTER TABLE "polls" ADD "open" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170303201354"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayResultsToPolls (20170303201428)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (38.3ms)[0m  [1m[35mALTER TABLE "polls" ADD "display_results" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170303201428"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPlanToEvents (20170303212721)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.3ms)[0m  [1m[35mALTER TABLE "events" ADD "plan" character varying DEFAULT 'pro'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170303212721"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUpvotesCountToQuestions (20170306164303)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (40.7ms)[0m  [1m[35mALTER TABLE "questions" ADD "upvotes_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170306164303"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddQuestionsCountToUsers (20170306185706)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (72.9ms)[0m  [1m[35mALTER TABLE "users" ADD "questions_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170306185706"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUpvotesCountToUsers (20170306185813)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (35.9ms)[0m  [1m[35mALTER TABLE "users" ADD "upvotes_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170306185813"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddOptionsCountToPolls (20170306190243)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.2ms)[0m  [1m[35mALTER TABLE "polls" ADD "options_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170306190243"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAnswersCountToPolls (20170306190349)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.1ms)[0m  [1m[35mALTER TABLE "polls" ADD "answers_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170306190349"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayedToQuestions (20170308130532)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.6ms)[0m  [1m[35mALTER TABLE "questions" ADD "displayed" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170308130532"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddReadToNotifications (20170308132647)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.2ms)[0m  [1m[35mALTER TABLE "notifications" ADD "read" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170308132647"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventModerators (20170308144745)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.7ms)[0m  [1m[35mCREATE TABLE "event_moderators" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "user_id" uuid, "event_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b7228ad32e"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f9e19f3bd8"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_event_moderators_on_user_id" ON "event_moderators"  ("user_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX  "index_event_moderators_on_event_id" ON "event_moderators"  ("event_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170308144745"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDetailsToEvents (20170414215109)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "event_date_start" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "events" ADD "event_date_end" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "events" ADD "cover" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "events" ADD "description" text[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "events" ADD "category" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "location" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "events" ADD "practical_information" text[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "organizer_contact" text[0m
+  [1m[35m (22.5ms)[0m  [1m[35mALTER TABLE "events" ADD "isLive" bool DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170414215109"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventAgendas (20170414215901)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.3ms)[0m  [1m[35mCREATE TABLE "event_agendas" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "event_id" uuid, "date" date, "time_start" time, "time_end" time, "title" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_6b184d97fc"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_event_agendas_on_event_id" ON "event_agendas"  ("event_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170414215901"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventSpeakers (20170414215911)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.6ms)[0m  [1m[35mCREATE TABLE "event_speakers" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "event_id" uuid, "name" character varying, "affiliation" text, "picture" character varying, "biography" text, "role" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_bb4ea4c24a"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_event_speakers_on_event_id" ON "event_speakers"  ("event_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170414215911"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventSponsors (20170414215923)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.2ms)[0m  [1m[35mCREATE TABLE "event_sponsors" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "event_id" uuid, "name" character varying, "contact_email" character varying, "picture" character varying, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_3606849b8b"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_event_sponsors_on_event_id" ON "event_sponsors"  ("event_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170414215923"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddColorToRooms (20170420155423)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "rooms" ADD "color" character varying[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170420155423"]]
+  [1m[35m (81.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddEventUsersCountToEvents (20170424194019)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (42.5ms)[0m  [1m[35mALTER TABLE "events" ADD "event_users_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170424194019"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddContactsCountToEvents (20170424194229)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.1ms)[0m  [1m[35mALTER TABLE "events" ADD "contacts_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170424194229"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddEventIdToQuestions (20170424201120)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "questions" ADD "event_id" uuid[0m
+  [1m[35m (34.8ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_event_id" ON "questions"  ("event_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "questions" ADD CONSTRAINT "fk_rails_8651a7287f"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170424201120"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddQuestionsCountToEvents (20170424204407)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.9ms)[0m  [1m[35mALTER TABLE "events" ADD "questions_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170424204407"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddEventIdToPolls (20170424220803)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "polls" ADD "event_id" uuid[0m
+  [1m[35m (23.8ms)[0m  [1m[35mCREATE  INDEX  "index_polls_on_event_id" ON "polls"  ("event_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "polls" ADD CONSTRAINT "fk_rails_5d8b80899a"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170424220803"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayPanelOptionsToRooms (20170428205837)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_background_color" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_text_color" character varying[0m
+  [1m[35m (25.0ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_display_kb_logo" bool DEFAULT 't'[0m
+  [1m[35m (2.9ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_display_room_info" bool DEFAULT 't'[0m
+  [1m[35m (3.0ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_display_multiple_questions" bool DEFAULT 'f'[0m
+  [1m[35m (2.8ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_display_attendee_info" bool DEFAULT 'f'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170428205837"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddOptionsToQuestions (20170515222303)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (54.5ms)[0m  [1m[35mALTER TABLE "questions" ADD "hidden" boolean DEFAULT 'f'[0m
+  [1m[35m (3.7ms)[0m  [1m[35mALTER TABLE "questions" ADD "pinned_to_top" boolean DEFAULT 'f'[0m
+  [1m[35m (3.5ms)[0m  [1m[35mALTER TABLE "questions" ADD "sent_to_bottom" boolean DEFAULT 'f'[0m
+  [1m[35m (3.3ms)[0m  [1m[35mALTER TABLE "questions" ADD "deleted" boolean DEFAULT 'f'[0m
+  [1m[35m (3.3ms)[0m  [1m[35mALTER TABLE "questions" ADD "allowed" boolean DEFAULT 'f'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "questions" ADD "time_displayed" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "questions" ADD "time_pinned" timestamp[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170515222303"]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAutoAllowQuestionsToRooms (20170515223412)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.9ms)[0m  [1m[35mALTER TABLE "rooms" ADD "auto_allow_questions" boolean DEFAULT 't'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170515223412"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayedPollToRooms (20170526123559)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" ADD "displayed_poll" integer[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170526123559"]]
+  [1m[35m (23.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCallableToQuestions (20170526123852)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.7ms)[0m  [1m[35mALTER TABLE "questions" ADD "callable" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170526123852"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddListOrderToPolls (20170530152616)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "polls" ADD "list_order" integer[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170530152616"]]
+  [1m[35m (23.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeDisplayedPollToRooms (20170530153735)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.8ms)[0m  [1m[35mALTER TABLE "rooms" ALTER COLUMN "displayed_poll" TYPE character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" ALTER COLUMN "displayed_poll" DROP DEFAULT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170530153735"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveDeviseFromUsers (20170602105403)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX  "index_users_on_reset_password_token"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" DROP "encrypted_password"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" DROP "reset_password_token"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" DROP "reset_password_sent_at"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" DROP "remember_created_at"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" DROP "sign_in_count"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" DROP "current_sign_in_at"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" DROP "last_sign_in_at"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" DROP "current_sign_in_ip"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" DROP "last_sign_in_ip"[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170602105403"]]
+  [1m[35m (17.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateUsers (20170602150844)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.1ms)[0m  [1m[35mALTER TABLE "users" ADD "provider" character varying DEFAULT 'email' NOT NULL[0m
+  [1m[35m (3.3ms)[0m  [1m[35mALTER TABLE "users" ADD "uid" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (3.4ms)[0m  [1m[35mALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_ip" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmation_token" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmed_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmation_sent_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "unconfirmed_email" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "tokens" json[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170602150844"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to SetUidForUsers (20170602152513)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "users" SET uid=email[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170602152513"]]
+  [1m[35m (39.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAuthIndex (20170602152539)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (36.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_uid_and_provider" ON "users"  ("uid", "provider")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_confirmation_token" ON "users"  ("confirmation_token")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170602152539"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RolifyCreateRoles (20170620183851)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class RolifyCreateRoles < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE TABLE "roles" ("id" serial primary key, "name" character varying, "resource_type" character varying, "resource_id" uuid, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "users_roles" ("user_id" uuid, "role_id" integer)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_roles_on_name" ON "roles"  ("name")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_roles_on_name_and_resource_type_and_resource_id" ON "roles"  ("name", "resource_type", "resource_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_users_roles_on_user_id_and_role_id" ON "users_roles"  ("user_id", "role_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170620183851"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveIndexesFromPollAnswers (20170801070040)
+  [1m[35m (30.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX  "index_poll_answers_on_poll_id"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_poll_answers_on_user_id"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170801070040"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIndexesFromPollAnswers (20170801070327)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_poll_answers_on_poll_id" ON "poll_answers"  ("poll_id")[0m
+  [1m[35m (38.9ms)[0m  [1m[35mCREATE  INDEX  "index_poll_answers_on_user_id" ON "poll_answers"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170801070327"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTwoWayContactToContacts (20170811025444)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.0ms)[0m  [1m[35mALTER TABLE "contacts" ADD "two_way_contact" boolean DEFAULT 'f'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "contacts" ADD "blocked_by_id" uuid[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_a30fcdcfc1"
+FOREIGN KEY ("blocked_by_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170811025444"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserToMessages (20170811045438)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "messages" ADD "user_id" uuid[0m
+  [1m[35m (34.8ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_user_id" ON "messages"  ("user_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "messages" ADD CONSTRAINT "fk_rails_273a25a7a6"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170811045438"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddBlockedToMessages (20170811051327)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.2ms)[0m  [1m[35mALTER TABLE "messages" ADD "blocked" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170811051327"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddReferencesToNotifications (20170815070404)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "notifications" ADD "event_id" uuid[0m
+  [1m[35m (23.2ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_event_id" ON "notifications"  ("event_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_78f4b5a537"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "notifications" ADD "room_id" uuid[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_room_id" ON "notifications"  ("room_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_b401d5ae60"
+FOREIGN KEY ("room_id")
+  REFERENCES "rooms" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "notifications" ADD "poll_id" uuid[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_poll_id" ON "notifications"  ("poll_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_26b22d58d9"
+FOREIGN KEY ("poll_id")
+  REFERENCES "polls" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "notifications" ADD "question_id" uuid[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_question_id" ON "notifications"  ("question_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_1879226be5"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "notifications" ADD "contact_id" uuid[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_contact_id" ON "notifications"  ("contact_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_bf019a47e7"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170815070404"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddMessageReferenceToNotifications (20170821062009)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "notifications" ADD "message_id" uuid[0m
+  [1m[35m (35.3ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_message_id" ON "notifications"  ("message_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_248684c8cf"
+FOREIGN KEY ("message_id")
+  REFERENCES "messages" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170821062009"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDescriptionToUsers (20170906064510)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "description" text[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170906064510"]]
+  [1m[35m (40.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAllowMicrophoneRequestsToRooms (20170909185838)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.0ms)[0m  [1m[35mALTER TABLE "rooms" ADD "allow_microphone_requests" bool DEFAULT 't'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170909185838"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddReadToMessages (20170925055442)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (37.1ms)[0m  [1m[35mALTER TABLE "messages" ADD "read" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170925055442"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDataToNotifications (20170928063039)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "notifications" ADD "data" json[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170928063039"]]
+  [1m[35m (41.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddQuestionUnderCallToRooms (20171023070844)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" ADD "question_under_call" boolean[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171023070844"]]
+  [1m[35m (37.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeQuestionUnderCallToString (20171025083903)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.8ms)[0m  [1m[35mALTER TABLE "rooms" ALTER COLUMN "question_under_call" TYPE character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "rooms" ALTER COLUMN "question_under_call" DROP DEFAULT[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171025083903"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddEventTimeStartEndToEvents (20171127054227)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "event_time_start" time[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "event_time_end" time[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171127054227"]]
+  [1m[35m (23.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDeletedToUsers (20181116083922)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "deleted" boolean[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181116083922"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2018-11-16 08:41:27 UTC], ["updated_at", 2018-11-16 08:41:27 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5442121261805267340)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5442121261805267340);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddDeletedToUsers (20181116084550)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (42.2ms)[0m  [1m[35mALTER TABLE "users" ADD "deleted" boolean DEFAULT 'f'[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5442121261805267340)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5442121261805267340);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to AddDeletedToUsers (20181116084550)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.1ms)[0m  [1m[35mALTER TABLE "users" ADD "deleted" boolean DEFAULT 'f'[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5442121261805267340)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (171.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "keybate_development_v1"[0m
+  [1m[35m (205.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "keybate_test_v1"[0m
+  [1m[35m (19.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (18.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5442121261805267340);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateRooms (20151220191837)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (45.3ms)[0m  [1m[35mCREATE TABLE "rooms" ("id" serial primary key, "number" character varying, "key" character varying, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20151220191837"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAttendees (20151220191845)
+  [1m[35m (39.8ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateAttendees < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "attendees" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "email" character varying, "company_name" character varying, "job_name" character varying, "country" character varying, "picture" character varying, "joined_at" timestamp, "left_at" timestamp, "room_id" integer, "requested_call_at" timestamp, "hung_up_at" timestamp, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20151220191845"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateQuestions (20151220191853)
+  [1m[35m (39.9ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "questions" ("id" serial primary key, "room_id" integer, "attendee_id" integer, "body" text, "answered_at" timestamp, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20151220191853"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCallableToAttendees (20160208161141)
+  [1m[35m (40.8ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddCallableToAttendees < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (3.2ms)[0m  [1m[35mALTER TABLE "attendees" ADD "callable" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160208161141"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20160303143032)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateUsers < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (41.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "first_name" character varying, "last_name" character varying, "email" character varying, "location" character varying, "position" character varying, "picture_url" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160303143032"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateModerators (20160303143445)
+  [1m[35m (40.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateModerators < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "moderators" ("id" serial primary key, "room_id" integer, "user_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160303143445"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveUserFromAttendee (20160303143533)
+  [1m[35m (39.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class RemoveUserFromAttendee < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "attendees" DROP "first_name"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "attendees" DROP "last_name"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "attendees" DROP "email"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "attendees" DROP "company_name"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "attendees" DROP "job_name"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "attendees" DROP "country"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "attendees" DROP "picture"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160303143533"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdToAttendee (20160303144000)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddUserIdToAttendee < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "attendees" ADD "user_id" integer[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160303144000"]]
+  [1m[35m (23.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdAndIndexToUser (20160304183412)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddUserIdAndIndexToUser < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "api_user_id" character varying[0m
+  [1m[35m (22.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_api_user_id" ON "users"  ("api_user_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160304183412"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTitleToRooms (20160414095117)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddTitleToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" ADD "room_name" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160414095117"]]
+  [1m[35m (23.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddModeratorRemoveKeyToRooms (20160421145828)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddModeratorRemoveKeyToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "rooms" ADD "moderator_id" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" DROP "key"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160421145828"]]
+  [1m[35m (22.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddScoreToQuestions (20160518153310)
+  [1m[35m (1.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddScoreToQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (22.5ms)[0m  [1m[35mALTER TABLE "questions" ADD "score" integer DEFAULT 0[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160518153310"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFavorites (20160518155153)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateFavorites < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (26.0ms)[0m  [1m[35mCREATE TABLE "favorites" ("id" serial primary key, "follower_id" integer, "following_id" integer, "met_in_room" boolean DEFAULT 'f', "room_id" integer, "room_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160518155153"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFavoriteQuestions (20160522163607)
+  [1m[35m (25.0ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateFavoriteQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE "favorite_questions" ("id" serial primary key, "user_id" integer, "question_id" integer, "room_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160522163607"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddHiddenToQuestions (20160525101451)
+  [1m[35m (25.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddHiddenToQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (3.8ms)[0m  [1m[35mALTER TABLE "questions" ADD "hidden" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160525101451"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeFollowerToUser (20160608111907)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class ChangeFollowerToUser < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "favorites" RENAME COLUMN "follower_id" TO "user_id"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160608111907"]]
+  [1m[35m (22.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddProfileLinkToUsers (20160615123738)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddProfileLinkToUsers < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "users" ADD "facebook_profile_link" character varying[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "linkedin_profile_link" character varying[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160615123738"]]
+  [1m[35m (20.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPinAndDisplayToQuestions (20160827152531)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddPinAndDisplayToQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (27.3ms)[0m  [1m[35mALTER TABLE "questions" ADD "pinnedByModerator" bool DEFAULT 'f'[0m
+  [1m[35m (2.6ms)[0m  [1m[35mALTER TABLE "questions" ADD "displayed" bool DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160827152531"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RenamePinToQuestions (20160827153449)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class RenamePinToQuestions < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "questions" RENAME COLUMN "pinnedByModerator" TO "pinned_by_moderator"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160827153449"]]
+  [1m[35m (22.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayPanelDisplayNewToRooms (20160907133050)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddDisplayPanelDisplayNewToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (25.1ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_display_new" bool DEFAULT 't'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160907133050"]]
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateQcmPolls (20160916103039)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateQcmPolls < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (23.7ms)[0m  [1m[35mCREATE TABLE "qcm_polls" ("id" serial primary key, "question" character varying, "option_a" character varying, "option_a_score" integer DEFAULT 0, "option_b" character varying, "option_b_score" integer DEFAULT 0, "option_c" character varying, "option_c_score" integer DEFAULT 0, "option_d" character varying, "option_d_score" integer DEFAULT 0, "moderator_id" integer, "room_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160916103039"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAnsweredPolls (20161004125140)
+  [1m[35m (25.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateAnsweredPolls < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "answered_polls" ("id" serial primary key, "option_letter" character varying, "answer_text" character varying, "room_name" character varying, "qcm_poll_id" integer, "user_id" integer, "room_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004125140"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddSentOutToQcmPolls (20161012111623)
+  [1m[35m (25.9ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddSentOutToQcmPolls < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (3.2ms)[0m  [1m[35mALTER TABLE "qcm_polls" ADD "sent_out" bool DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161012111623"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTotalAnswersToQcmPolls (20161012133924)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddTotalAnswersToQcmPolls < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (25.9ms)[0m  [1m[35mALTER TABLE "qcm_polls" ADD "total_answers" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161012133924"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayOptionsToRooms (20161129052137)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddDisplayOptionsToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (27.1ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_display_poll" bool DEFAULT 'f'[0m
+  [1m[35m (2.7ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_display_poll_results" bool DEFAULT 't'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161129052137"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayPollIdToRooms (20161129071406)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddDisplayPollIdToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_current_poll" integer[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161129071406"]]
+  [1m[35m (23.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddChartsToRooms (20170110213816)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddChartsToRooms < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (26.1ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_display_poll_bar_chart" bool DEFAULT 'f'[0m
+  [1m[35m (4.7ms)[0m  [1m[35mALTER TABLE "rooms" ADD "display_panel_display_poll_pie_chart" bool DEFAULT 'f'[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170110213816"]]
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDeviseToUsers (20170210103611)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.3ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (4.5ms)[0m  [1m[35mALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_at" timestamp[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_ip" inet[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_ip" inet[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170210103611"]]
+  [1m[35m (19.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to EnableUuidExtension (20170223192025)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (75.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "uuid-ossp"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170223192025"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEvents (20170223192343)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (42.0ms)[0m  [1m[35mCREATE TABLE "events" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170223192343"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeUsersPrimaryKey (20170223201548)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (44.5ms)[0m  [1m[35mALTER TABLE "users" ADD "uuid" uuid DEFAULT uuid_generate_v4() NOT NULL[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" DROP "id"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" RENAME COLUMN "uuid" TO "id"[0m
+  [1m[35m (24.8ms)[0m  [1m[35mALTER TABLE users ADD PRIMARY KEY (id);[0m
+  [1m[35mSQL (3.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170223201548"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventUsers (20170223212114)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.4ms)[0m  [1m[35mCREATE TABLE "event_users" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "user_id" uuid, "event_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_2fc76a96e7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_55572bff4d"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_event_users_on_user_id" ON "event_users"  ("user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_event_users_on_event_id" ON "event_users"  ("event_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170223212114"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeTableNameFromRooms (20170224174218)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" RENAME TO "old_rooms"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "public"."rooms_id_seq" RENAME TO "old_rooms_id_seq"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER INDEX "rooms_pkey" RENAME TO "old_rooms_pkey"[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224174218"]]
+  [1m[35m (40.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateNewRooms (20170224174349)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (40.5ms)[0m  [1m[35mCREATE TABLE "rooms" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "name" character varying, "event_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_aad715f1d9"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_rooms_on_event_id" ON "rooms"  ("event_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224174349"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeTableNameFromQuestions (20170224191203)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "questions" RENAME TO "old_questions"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "public"."questions_id_seq" RENAME TO "old_questions_id_seq"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER INDEX "questions_pkey" RENAME TO "old_questions_pkey"[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224191203"]]
+  [1m[35m (39.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateNewQuestions (20170224191303)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE TABLE "questions" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "message" text, "room_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_c982daf8c9"
+FOREIGN KEY ("room_id")
+  REFERENCES "rooms" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_room_id" ON "questions"  ("room_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224191303"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePolls (20170224203346)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.0ms)[0m  [1m[35mCREATE TABLE "polls" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "title" character varying, "room_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_874e1aec20"
+FOREIGN KEY ("room_id")
+  REFERENCES "rooms" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_polls_on_room_id" ON "polls"  ("room_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224203346"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventUserRooms (20170224214132)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.9ms)[0m  [1m[35mCREATE TABLE "event_user_rooms" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "event_user_id" uuid, "room_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_d93290ef93"
+FOREIGN KEY ("event_user_id")
+  REFERENCES "event_users" ("id")
+, CONSTRAINT "fk_rails_bc24eea059"
+FOREIGN KEY ("room_id")
+  REFERENCES "rooms" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_event_user_rooms_on_event_user_id" ON "event_user_rooms"  ("event_user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_event_user_rooms_on_room_id" ON "event_user_rooms"  ("room_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170224214132"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePollOptions (20170225171601)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.6ms)[0m  [1m[35mCREATE TABLE "poll_options" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "description" text, "poll_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_aa85becb42"
+FOREIGN KEY ("poll_id")
+  REFERENCES "polls" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_poll_options_on_poll_id" ON "poll_options"  ("poll_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170225171601"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateContacts (20170227193932)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.5ms)[0m  [1m[35mCREATE TABLE "contacts" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "event_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_4f68bfc985"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_event_id" ON "contacts"  ("event_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170227193932"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddForeignKeysToContacts (20170227195624)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "contacts" ADD "to_user_id" uuid[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "contacts" ADD "from_user_id" uuid[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_1274d05605"
+FOREIGN KEY ("to_user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_55611428c0"
+FOREIGN KEY ("from_user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170227195624"]]
+  [1m[35m (20.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateNotifications (20170228135205)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (23.9ms)[0m  [1m[35mCREATE TABLE "notifications" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "title" character varying, "description" text, "user_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b080fb4855"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_user_id" ON "notifications"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170228135205"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateMessages (20170228145927)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.8ms)[0m  [1m[35mCREATE TABLE "messages" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "body" text, "contact_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_7e8ca78ca8"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_contact_id" ON "messages"  ("contact_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170228145927"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCodeToEvent (20170228203917)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "code" character varying[0m
+  [1m[35m (23.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_events_on_code" ON "events"  ("code")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170228203917"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddLastMessageSentAtToContact (20170301011153)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "contacts" ADD "last_message_sent_at" timestamp[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301011153"]]
+  [1m[35m (23.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePollAnswers (20170301165255)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.3ms)[0m  [1m[35mCREATE TABLE "poll_answers" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "poll_id" uuid, "user_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_bc68367a40"
+FOREIGN KEY ("poll_id")
+  REFERENCES "polls" ("id")
+, CONSTRAINT "fk_rails_da1c9c019b"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_poll_answers_on_poll_id" ON "poll_answers"  ("poll_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_poll_answers_on_user_id" ON "poll_answers"  ("user_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301165255"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddForeignKeyToPollAnswear (20170301165453)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "poll_answers" ADD "option_id" uuid[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "poll_answers" ADD CONSTRAINT "fk_rails_6b7005ccd6"
+FOREIGN KEY ("option_id")
+  REFERENCES "poll_options" ("id")
+[0m
+  [1m[35m (20.8ms)[0m  [1m[35mCREATE  INDEX  "index_poll_answers_on_option_id" ON "poll_answers"  ("option_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301165453"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIndexesToContacts (20170301171347)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (23.6ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_from_user_id" ON "contacts"  ("from_user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_contacts_on_to_user_id" ON "contacts"  ("to_user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301171347"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserToQuestion (20170301194346)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "questions" ADD "user_id" uuid[0m
+  [1m[35m (23.2ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_user_id" ON "questions"  ("user_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "questions" ADD CONSTRAINT "fk_rails_047ab75908"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301194346"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateQuestionUpvotes (20170301200023)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.3ms)[0m  [1m[35mCREATE TABLE "question_upvotes" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "user_id" uuid, "question_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_635f5ea25a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_7bdc6a4ebe"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_question_upvotes_on_user_id" ON "question_upvotes"  ("user_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_question_upvotes_on_question_id" ON "question_upvotes"  ("question_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301200023"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddBlockedToContact (20170301201838)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.5ms)[0m  [1m[35mALTER TABLE "contacts" ADD "blocked" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170301201838"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPublishedToPolls (20170303195332)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (28.7ms)[0m  [1m[35mALTER TABLE "polls" ADD "published" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170303195332"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddOpenToPolls (20170303201354)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.8ms)[0m  [1m[35mALTER TABLE "polls" ADD "open" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170303201354"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayResultsToPolls (20170303201428)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.6ms)[0m  [1m[35mALTER TABLE "polls" ADD "display_results" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170303201428"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPlanToEvents (20170303212721)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.0ms)[0m  [1m[35mALTER TABLE "events" ADD "plan" character varying DEFAULT 'pro'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170303212721"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUpvotesCountToQuestions (20170306164303)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.6ms)[0m  [1m[35mALTER TABLE "questions" ADD "upvotes_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170306164303"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddQuestionsCountToUsers (20170306185706)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (28.0ms)[0m  [1m[35mALTER TABLE "users" ADD "questions_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170306185706"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUpvotesCountToUsers (20170306185813)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.8ms)[0m  [1m[35mALTER TABLE "users" ADD "upvotes_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170306185813"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddOptionsCountToPolls (20170306190243)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.7ms)[0m  [1m[35mALTER TABLE "polls" ADD "options_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170306190243"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAnswersCountToPolls (20170306190349)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.9ms)[0m  [1m[35mALTER TABLE "polls" ADD "answers_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170306190349"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayedToQuestions (20170308130532)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.7ms)[0m  [1m[35mALTER TABLE "questions" ADD "displayed" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170308130532"]]
+  [1m[35m (2.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddReadToNotifications (20170308132647)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.2ms)[0m  [1m[35mALTER TABLE "notifications" ADD "read" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170308132647"]]
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventModerators (20170308144745)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.3ms)[0m  [1m[35mCREATE TABLE "event_moderators" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "user_id" uuid, "event_id" uuid, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_b7228ad32e"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_f9e19f3bd8"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_event_moderators_on_user_id" ON "event_moderators"  ("user_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_event_moderators_on_event_id" ON "event_moderators"  ("event_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170308144745"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDetailsToEvents (20170414215109)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "event_date_start" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "event_date_end" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "cover" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "description" text[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "category" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "location" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "practical_information" text[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "events" ADD "organizer_contact" text[0m
+  [1m[35m (24.9ms)[0m  [1m[35mALTER TABLE "events" ADD "isLive" bool DEFAULT 'f'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170414215109"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventAgendas (20170414215901)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.0ms)[0m  [1m[35mCREATE TABLE "event_agendas" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "event_id" uuid, "date" date, "time_start" time, "time_end" time, "title" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_6b184d97fc"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_event_agendas_on_event_id" ON "event_agendas"  ("event_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170414215901"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventSpeakers (20170414215911)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (28.7ms)[0m  [1m[35mCREATE TABLE "event_speakers" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "event_id" uuid, "name" character varying, "affiliation" text, "picture" character varying, "biography" text, "role" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_bb4ea4c24a"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_event_speakers_on_event_id" ON "event_speakers"  ("event_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170414215911"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEventSponsors (20170414215923)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.9ms)[0m  [1m[35mCREATE TABLE "event_sponsors" ("id" uuid DEFAULT uuid_generate_v4() PRIMARY KEY, "event_id" uuid, "name" character varying, "contact_email" character varying, "picture" character varying, "description" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_3606849b8b"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_event_sponsors_on_event_id" ON "event_sponsors"  ("event_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170414215923"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddColorToRooms (20170420155423)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" ADD "color" character varying[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170420155423"]]
+  [1m[35m (25.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddEventUsersCountToEvents (20170424194019)
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.4ms)[0m  [1m[35mALTER TABLE "events" ADD "event_users_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170424194019"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddContactsCountToEvents (20170424194229)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.3ms)[0m  [1m[35mALTER TABLE "events" ADD "contacts_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170424194229"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddEventIdToQuestions (20170424201120)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "questions" ADD "event_id" uuid[0m
+  [1m[35m (22.8ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_event_id" ON "questions"  ("event_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "questions" ADD CONSTRAINT "fk_rails_8651a7287f"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170424201120"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddQuestionsCountToEvents (20170424204407)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.5ms)[0m  [1m[35mALTER TABLE "events" ADD "questions_count" integer DEFAULT 0[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170424204407"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddEventIdToPolls (20170424220803)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "polls" ADD "event_id" uuid[0m
+  [1m[35m (23.6ms)[0m  [1m[35mCREATE  INDEX  "index_polls_on_event_id" ON "polls"  ("event_id")[0m
+  [1m[35m (2.6ms)[0m  [1m[35mALTER TABLE "polls" ADD CONSTRAINT "fk_rails_5d8b80899a"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170424220803"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayPanelOptionsToRooms (20170428205837)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_background_color" character varying[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_text_color" character varying[0m
+  [1m[35m (24.8ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_display_kb_logo" bool DEFAULT 't'[0m
+  [1m[35m (5.1ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_display_room_info" bool DEFAULT 't'[0m
+  [1m[35m (3.0ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_display_multiple_questions" bool DEFAULT 'f'[0m
+  [1m[35m (3.8ms)[0m  [1m[35mALTER TABLE "rooms" ADD "dp_display_attendee_info" bool DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170428205837"]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddOptionsToQuestions (20170515222303)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (229.6ms)[0m  [1m[35mALTER TABLE "questions" ADD "hidden" boolean DEFAULT 'f'[0m
+  [1m[35m (4.3ms)[0m  [1m[35mALTER TABLE "questions" ADD "pinned_to_top" boolean DEFAULT 'f'[0m
+  [1m[35m (3.3ms)[0m  [1m[35mALTER TABLE "questions" ADD "sent_to_bottom" boolean DEFAULT 'f'[0m
+  [1m[35m (3.6ms)[0m  [1m[35mALTER TABLE "questions" ADD "deleted" boolean DEFAULT 'f'[0m
+  [1m[35m (5.8ms)[0m  [1m[35mALTER TABLE "questions" ADD "allowed" boolean DEFAULT 'f'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "questions" ADD "time_displayed" timestamp[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "questions" ADD "time_pinned" timestamp[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170515222303"]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAutoAllowQuestionsToRooms (20170515223412)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (27.7ms)[0m  [1m[35mALTER TABLE "rooms" ADD "auto_allow_questions" boolean DEFAULT 't'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170515223412"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDisplayedPollToRooms (20170526123559)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "rooms" ADD "displayed_poll" integer[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170526123559"]]
+  [1m[35m (23.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCallableToQuestions (20170526123852)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.8ms)[0m  [1m[35mALTER TABLE "questions" ADD "callable" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170526123852"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddListOrderToPolls (20170530152616)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "polls" ADD "list_order" integer[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170530152616"]]
+  [1m[35m (21.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeDisplayedPollToRooms (20170530153735)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (29.5ms)[0m  [1m[35mALTER TABLE "rooms" ALTER COLUMN "displayed_poll" TYPE character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "rooms" ALTER COLUMN "displayed_poll" DROP DEFAULT[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170530153735"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveDeviseFromUsers (20170602105403)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX  "index_users_on_reset_password_token"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" DROP "encrypted_password"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" DROP "reset_password_token"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" DROP "reset_password_sent_at"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" DROP "remember_created_at"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" DROP "sign_in_count"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" DROP "current_sign_in_at"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" DROP "last_sign_in_at"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" DROP "current_sign_in_ip"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" DROP "last_sign_in_ip"[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170602105403"]]
+  [1m[35m (41.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseTokenAuthCreateUsers (20170602150844)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.3ms)[0m  [1m[35mALTER TABLE "users" ADD "provider" character varying DEFAULT 'email' NOT NULL[0m
+  [1m[35m (3.5ms)[0m  [1m[35mALTER TABLE "users" ADD "uid" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (3.2ms)[0m  [1m[35mALTER TABLE "users" ADD "encrypted_password" character varying DEFAULT '' NOT NULL[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "remember_created_at" timestamp[0m
+  [1m[35m (3.5ms)[0m  [1m[35mALTER TABLE "users" ADD "sign_in_count" integer DEFAULT 0 NOT NULL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "current_sign_in_ip" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_sign_in_ip" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmation_token" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmed_at" timestamp[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmation_sent_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "unconfirmed_email" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "tokens" json[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170602150844"]]
+  [1m[35m (2.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to SetUidForUsers (20170602152513)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "users" SET uid=email[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170602152513"]]
+  [1m[35m (39.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAuthIndex (20170602152539)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_uid_and_provider" ON "users"  ("uid", "provider")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_confirmation_token" ON "users"  ("confirmation_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170602152539"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RolifyCreateRoles (20170620183851)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class RolifyCreateRoles < ActiveRecord::Migration[4.2] (called from load at /Users/sergey/.rvm/gems/ruby-2.3.0/bin/rake:23)
+  [1m[35m (30.9ms)[0m  [1m[35mCREATE TABLE "roles" ("id" serial primary key, "name" character varying, "resource_type" character varying, "resource_id" uuid, "created_at" timestamp, "updated_at" timestamp)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "users_roles" ("user_id" uuid, "role_id" integer)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_roles_on_name" ON "roles"  ("name")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_roles_on_name_and_resource_type_and_resource_id" ON "roles"  ("name", "resource_type", "resource_id")[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_users_roles_on_user_id_and_role_id" ON "users_roles"  ("user_id", "role_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170620183851"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to RemoveIndexesFromPollAnswers (20170801070040)
+  [1m[35m (41.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP INDEX  "index_poll_answers_on_poll_id"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP INDEX  "index_poll_answers_on_user_id"[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170801070040"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddIndexesFromPollAnswers (20170801070327)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (40.3ms)[0m  [1m[35mCREATE  INDEX  "index_poll_answers_on_poll_id" ON "poll_answers"  ("poll_id")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_poll_answers_on_user_id" ON "poll_answers"  ("user_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170801070327"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTwoWayContactToContacts (20170811025444)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (42.6ms)[0m  [1m[35mALTER TABLE "contacts" ADD "two_way_contact" boolean DEFAULT 'f'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "contacts" ADD "blocked_by_id" uuid[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "contacts" ADD CONSTRAINT "fk_rails_a30fcdcfc1"
+FOREIGN KEY ("blocked_by_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170811025444"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserToMessages (20170811045438)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "messages" ADD "user_id" uuid[0m
+  [1m[35m (41.0ms)[0m  [1m[35mCREATE  INDEX  "index_messages_on_user_id" ON "messages"  ("user_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "messages" ADD CONSTRAINT "fk_rails_273a25a7a6"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170811045438"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddBlockedToMessages (20170811051327)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (37.9ms)[0m  [1m[35mALTER TABLE "messages" ADD "blocked" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170811051327"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddReferencesToNotifications (20170815070404)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "notifications" ADD "event_id" uuid[0m
+  [1m[35m (40.4ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_event_id" ON "notifications"  ("event_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_78f4b5a537"
+FOREIGN KEY ("event_id")
+  REFERENCES "events" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "notifications" ADD "room_id" uuid[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_room_id" ON "notifications"  ("room_id")[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_b401d5ae60"
+FOREIGN KEY ("room_id")
+  REFERENCES "rooms" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "notifications" ADD "poll_id" uuid[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_poll_id" ON "notifications"  ("poll_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_26b22d58d9"
+FOREIGN KEY ("poll_id")
+  REFERENCES "polls" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "notifications" ADD "question_id" uuid[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_question_id" ON "notifications"  ("question_id")[0m
+  [1m[35m (1.7ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_1879226be5"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "notifications" ADD "contact_id" uuid[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_contact_id" ON "notifications"  ("contact_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_bf019a47e7"
+FOREIGN KEY ("contact_id")
+  REFERENCES "contacts" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170815070404"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddMessageReferenceToNotifications (20170821062009)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "notifications" ADD "message_id" uuid[0m
+  [1m[35m (41.2ms)[0m  [1m[35mCREATE  INDEX  "index_notifications_on_message_id" ON "notifications"  ("message_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "notifications" ADD CONSTRAINT "fk_rails_248684c8cf"
+FOREIGN KEY ("message_id")
+  REFERENCES "messages" ("id")
+[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170821062009"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDescriptionToUsers (20170906064510)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "description" text[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170906064510"]]
+  [1m[35m (40.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddAllowMicrophoneRequestsToRooms (20170909185838)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.2ms)[0m  [1m[35mALTER TABLE "rooms" ADD "allow_microphone_requests" bool DEFAULT 't'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170909185838"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddReadToMessages (20170925055442)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (42.9ms)[0m  [1m[35mALTER TABLE "messages" ADD "read" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170925055442"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDataToNotifications (20170928063039)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "notifications" ADD "data" json[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20170928063039"]]
+  [1m[35m (39.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddQuestionUnderCallToRooms (20171023070844)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "rooms" ADD "question_under_call" boolean[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171023070844"]]
+  [1m[35m (40.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeQuestionUnderCallToString (20171025083903)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (44.5ms)[0m  [1m[35mALTER TABLE "rooms" ALTER COLUMN "question_under_call" TYPE character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "rooms" ALTER COLUMN "question_under_call" DROP DEFAULT[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171025083903"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddEventTimeStartEndToEvents (20171127054227)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "events" ADD "event_time_start" time[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "events" ADD "event_time_end" time[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20171127054227"]]
+  [1m[35m (31.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDeletedToUsers (20181116084550)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.7ms)[0m  [1m[35mALTER TABLE "users" ADD "deleted" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20181116084550"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2018-11-16 08:48:24 UTC], ["updated_at", 2018-11-16 08:48:24 UTC]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5442121261805267340)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m

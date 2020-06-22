@@ -1,0 +1,134 @@
+- As a visitor I can sign in using email+password
+- As a visitor I can sign in using Facebook
+- As a visitor I can sign in using Linkedin
+- As a visitor I can sign in using Google
+- As a visitor I can sign in using Twitter
+
+- As a attendee I can join a event by code
+- As a attendee I can see previous events
+- As a attendee I can see a event's info
+- As a attendee I can see a event's rooms
+
+- As a attendee I should be able to update my account
+- As a attendee I should be able to update my profile
+
+- As a attendee I can see all questions sent
+- As a attendee I can upvote questions
+- As a attendee I can see questions I upvoted
+- As a attendee I can send a question to a talk
+
+- As a attendee I can see unanswered polls
+- As a attendee I can answer unanswered polls
+- As a attendee I can see stats for previous answered/closed polls
+
+- As a attendee I can see all the other attendees for a given event
+- As a attendee I can sort the list of other attendees by name or newest
+- As a attendee I can search for other attendees
+- As a attendee I can see all the other attendees for a given event that are already part of my network
+- As a attendee I can add someone to my network
+- As a attendee I can remove a contact
+
+- As a attendee I can see my network
+- As a attendee I can see my discussions
+- As a attendee I can send messages to a contact
+- As a attendee I can block a contact/unblock (NOT IN THE UI)
+
+- As a attendee I can receive notifications when someone messages you
+- As a attendee I can receive notifications when a poll has been sent out in a room you joined
+- As a attendee I can receive notifications when your question received a first like (and five likes “it’s on fire!”)
+- As a attendee I can receive notifications when someone added me to his network
+- As a attendee I can receive notifications when speaker is calling me
+- As a attendee I can see a list of my notifications
+
+- As a moderator I can see the moderator dashboard
+- As a moderator I can see incoming questions
+- As a moderator I can approve incoming questions
+- As a moderator I can reject incoming questions
+
+- As a moderator I can see questions
+- As a moderator I can call a attendee using their audio question
+- As a moderator I can display a question
+- As a moderator I can pin a questions
+- As a moderator I can move a question to the bottom of the list
+
+- As a moderator I can choose between Pro and Premium account
+- As a moderator I can create an event
+- As a moderator I can see all polls
+- As a moderator I can create polls and send them to attendees later
+- As a moderator I can create and send pools to attendees
+- As a moderator I can see open/close polls
+- As a moderator I can see open/close polls display results
+- As a moderator I can see attendees by room and their activities counts
+- As a moderator I can sort attendees list by name, location or activity counts
+- As a moderator I can open the display
+- As a moderator I can change display's settings
+
+- As a speaker I can see questions
+- As a speaker I can call a attendee using their audio question
+- As a speaker I can display a question
+- As a speaker I can pin a questions
+- As a speaker I can move a question to the bottom of the list
+- As a speaker I can see most upvoted questions
+- As a speaker I can see most recent questions
+- As a speaker I can see saved polls
+- As a speaker I can send a poll to attendees
+- As a speaker I can see sent polls
+- As a speaker I can see a poll's stats
+
+/sign_up
+/sign_in
+
+/events
+/events/:id
+/events/:id/join
+/events/:id/attendees
+
+/events/:event_id/rooms
+/events/:event_id/rooms/:id
+
+/events/:event_id/rooms/:room_id/questions
+/events/:event_id/rooms/:room_id/questions/:id
+/events/:event_id/rooms/:room_id/questions/:id/upvote
+/events/:event_id/rooms/:room_id/questions/:id/pin
+/events/:event_id/rooms/:room_id/questions/:id/send_to_bottom
+/events/:event_id/rooms/:room_id/questions/:id/call
+
+/events/:event_id/rooms/:room_id/polls
+/events/:event_id/rooms/:room_id/polls/:id
+/events/:event_id/rooms/:room_id/polls/:id/answers
+/events/:event_id/rooms/:room_id/polls/:id/publish
+
+/events/:event_id/rooms/:room_id/attendees
+
+/notifications
+/notifications/:id
+/notifications/:id/mark_as_read
+
+/connections
+
+/conversations
+/conversations/:id
+/conversations/:id/mask_as_read
+/conversations/:conversation_id/messages
+
+
+
+user = { first_name, last_name, email, password, language }
+user_profile = { avatar, job_title, location, company, bio, website }
+event = { name, code, avatar, description, speakers, moderators, sponsors, pratical_information, organizer, start_date, end_date }
+room = { name, color, number, talks }
+contact = *{ user, add_from_event }
+talk = { event, room, speaker }
+question = { user, talk, message, incognito }
+question_audio = { user, talk, audio_request }
+poll = { title, talk, poll_options }
+poll_options = { description }
+notification = { title, description }
+attendees = { }
+
+
+Questions:
+- How do I go to my network page?
+- When is a poll closed?
+- Should we better restructure polls? Or should we just go with input text so the moderator can type whatever they want?
+- Are we going to enable users to answer by custom option?

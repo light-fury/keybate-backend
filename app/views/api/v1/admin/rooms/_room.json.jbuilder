@@ -1,0 +1,1 @@
+json.(room, :id, :name, :color, :dp_background_color, :dp_text_color, :dp_display_kb_logo, :dp_display_room_info, :dp_display_multiple_questions, :dp_display_attendee_info, :auto_allow_questions, :displayed_poll, :question_under_call)

@@ -1,0 +1,14 @@
+development:
+  adapter: async
+
+test:
+  adapter: async
+
+production:
+  adapter: redis
+  url: <%= ENV['REDISTOGO_URL'] %>
+  :host: <%= ENV['REDISTOGO_HOST'] %>
+  :port: <%= ENV['REDISTOGO_PORT'] %>
+  :password: <%= ENV['REDISTOGO_PASSWORD'] %>
+  :inline: true
+  :timeout: 1
